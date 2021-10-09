@@ -8,12 +8,12 @@ import java.util.ArrayList;
 public interface TrabajadorInterface {
 
     ArrayList<Trabajador> mostraTodos() throws SQLException;
-    ArrayList<Trabajador> buscarTrabajador(String busqueda, int tipo) throws SQLException;
+    ArrayList<Trabajador> buscar(String busqueda, int tipo) throws SQLException;
     boolean insertar(Trabajador dts) throws SQLException;
     boolean editar(Trabajador dts) throws SQLException;
     boolean eliminar(Trabajador dts) throws SQLException;
     boolean eliminar(int dts) throws SQLException;
-    int login(String correo, String contraseña) throws SQLException;
+    int login(String correo, String contrasenia) throws SQLException;
 
 
 }

@@ -1,5 +1,7 @@
 package com.eme22.desweb1.util;
 
+import com.eme22.desweb1.dao.ClienteDAO;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,6 +10,7 @@ import java.sql.SQLException;
 public class Conexion {
 
     private static Conexion instancia;
+    private static Connection connection;
 
     public static Conexion getInstancia() {
         if (instancia == null) {
@@ -17,13 +20,20 @@ public class Conexion {
     }
 
     private Conexion() {
-
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mariadb://localhost/dbbuses2", "root", "");
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
     
     public Connection getConexion() throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.jdbc.Driver");
-        return DriverManager.getConnection("jdbc:mysql://localhost/dbbuses2", "root", "");
+        if (connection.isClosed()){
+            return DriverManager.getConnection("jdbc:mariadb://localhost/dbbuses2", "root", "");
+        } else return connection;
     }
+
 
     // STATIC UTLIES
 
@@ -39,6 +49,18 @@ public class Conexion {
                 return true;
             }
 
+        }
+        cn.close();
+        return false;
+    }
+
+    //EJECUTAR UN STATEMENT
+    public static boolean execStatement(PreparedStatement pst, Connection cn) throws SQLException {
+        int n = pst.executeUpdate();
+
+        if (n != 0) {
+                cn.close();
+                return true;
         }
         cn.close();
         return false;

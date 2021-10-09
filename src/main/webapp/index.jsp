@@ -19,14 +19,14 @@
     <body>
     <div id="home"></div>
     <!-- NAVIGATION -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-md-1" style="background-color: #D74E55!important;">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-md-1 bg-primary">
         <div class="d-flex flex-grow-1">
         <span class="w-100 d-lg-none d-block">
             <!-- hidden spacer to center brand on mobile --></span>
-            <a class="navbar-brand d-none d-lg-inline-block mx-auto ms-2" href="#">
+            <a class="navbar-brand d-none d-lg-inline-block mx-auto ms-2" href="index.jsp">
                 <h2 class="d-lg-inline-block mx-auto text-light">redBus</h2>
                 <img src="imagenes/favicon.png" alt="logo"> </a>
-            <a class="navbar-brand-two mx-auto d-lg-none d-inline-block" href="#">
+            <a class="navbar-brand-two mx-auto d-lg-none d-inline-block" href="index.jsp">
                 <img src="imagenes/favicon.png" alt="logo">
             </a>
             <div class="w-100 text-right">
@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="register.jsp" class="nav-link m-2 menu-item text-light">Registrate/Conectate
+                    <a href="Login.jsp" class="nav-link m-2 menu-item text-light">Conectate
                         <img src="imagenes/usuario.png" alt="logo" style="height: 3ex!important;">
                     </a>
                 </li>
@@ -67,7 +67,7 @@
                 <div class="text-white">
                     <h1 class="mb-3 text-dark">redBus</h1>
                     <h4 class="mb-3 text-dark">La red de buses mas grande del Perú</h4>
-                    <a class="btn btn-outline-danger btn-lg text-dark" href="#!" role="button">Registrate para Viajar</a>
+                    <a class="btn btn-outline-primary btn-lg text-dark" href="Register.jsp" role="button">Registrate para Viajar</a>
                 </div>
             </div>
         </div>
@@ -412,35 +412,35 @@
         </div>
     </section>
 
-    <footer class="text-center text-lg-start bg-light text-muted">
+    <footer class="text-center text-lg-start bg-primary text-muted">
         <!-- Section: Social media -->
         <section
                 class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
         >
             <!-- Left -->
             <div class="me-5 d-none d-lg-block">
-                <span>Get connected with us on social networks:</span>
+                <span>Conectate con nosotros:</span>
             </div>
             <!-- Left -->
 
             <!-- Right -->
             <div>
-                <a href="" class="me-4 text-reset">
+                <a href="" class="me-4 text-dark">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="" class="me-4 text-reset">
+                <a href="" class="me-4 text-dark">
                     <i class="fab fa-twitter"></i>
                 </a>
-                <a href="" class="me-4 text-reset">
+                <a href="" class="me-4 text-dark">
                     <i class="fab fa-google"></i>
                 </a>
-                <a href="" class="me-4 text-reset">
+                <a href="" class="me-4 text-dark">
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a href="" class="me-4 text-reset">
+                <a href="" class="me-4 text-dark">
                     <i class="fab fa-linkedin"></i>
                 </a>
-                <a href="" class="me-4 text-reset">
+                <a href="" class="me-4 text-dark">
                     <i class="fab fa-github"></i>
                 </a>
             </div>
@@ -473,16 +473,16 @@
                             Products
                         </h6>
                         <p>
-                            <a href="#!" class="text-reset">Angular</a>
+                            <a href="#!" class="text-dark">Angular</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">React</a>
+                            <a href="#!" class="text-dark">React</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Vue</a>
+                            <a href="#!" class="text-dark">Vue</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Laravel</a>
+                            <a href="#!" class="text-dark">Laravel</a>
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -494,16 +494,16 @@
                             Useful links
                         </h6>
                         <p>
-                            <a href="#!" class="text-reset">Pricing</a>
+                            <a href="#!" class="text-dark">Pricing</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Settings</a>
+                            <a href="#!" class="text-dark">Settings</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Orders</a>
+                            <a href="#!" class="text-dark">Orders</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Help</a>
+                            <a href="#!" class="text-dark">Help</a>
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -532,7 +532,7 @@
         <!-- Copyright -->
         <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
             © 2021 Copyright:
-            <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+            <a class="text-dark fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
         </div>
         <!-- Copyright -->
     </footer>

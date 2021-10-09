@@ -18,6 +18,10 @@ public class Reserva {
         this.reservaFecha = reservaFecha;
     }
 
+    public Reserva() {
+
+    }
+
     public int getReservaID() {
         return reservaID;
     }
