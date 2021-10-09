@@ -1,0 +1,21 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins);
+body {
+    font-family: "Poppins", sans-serif;
+    padding-top: 70px;
+}
+
+body.double {
+    font-family: "Poppins", sans-serif;
+    padding-top: 320px;
+}
+
+.light-blue-gradient {
+    background-image: url('../imagenes/registro_imagen.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+}
