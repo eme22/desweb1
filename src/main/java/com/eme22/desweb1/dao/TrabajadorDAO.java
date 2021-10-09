@@ -7,6 +7,8 @@ import com.eme22.desweb1.util.Conexion;
 import java.sql.*;
 import java.util.ArrayList;
 
+import static com.eme22.desweb1.util.Conexion.execStatement;
+
 public class TrabajadorDAO implements TrabajadorInterface {
 
     private Connection cnn = null;
@@ -27,6 +29,7 @@ public class TrabajadorDAO implements TrabajadorInterface {
         }
         return instancia;
     }
+
     @Override
     public ArrayList<Trabajador> mostraTodos() throws SQLException {
 
@@ -35,7 +38,7 @@ public class TrabajadorDAO implements TrabajadorInterface {
         sSQL = "SELECT p.PersonaID, p.PersonaDNI, t.TrabajadorID, t.TrabajadorEstado, p.PersonaApellidoM, " +
                 "p.PersonaApellidoP, p.PersonaNombre, p.PersonaContraseña, p.PersonaCorreo, " +
                 "p.PersonaDireccion, p.PersonaEdad, p.PersonaSexo, p.PersonaTelefono " +
-                "from persona p inner join trabajador t on p.PersonaID=t.PersonaID order by idPersona desc";
+                "from persona p inner join trabajador t on p.PersonaID=t.PersonaID order by PersonaID desc";
 
         Statement st = cn.createStatement();
         ResultSet rs = st.executeQuery(sSQL);
@@ -84,7 +87,7 @@ public class TrabajadorDAO implements TrabajadorInterface {
                 "p.PersonaApellidoP, p.PersonaNombre, p.PersonaContraseña, p.PersonaCorreo, " +
                 "p.PersonaDireccion, p.PersonaEdad, p.PersonaSexo, p.PersonaTelefono " +
                 "from persona p inner join trabajador t on p.PersonaID=t.PersonaID where "+ tipo2 +" like '%" +
-                busqueda + "%' order by idPersona desc";
+                busqueda + "%' order by PersonaID desc";
 
         Statement st = cn.createStatement();
         ResultSet rs = st.executeQuery(sSQL);
@@ -115,17 +118,17 @@ public class TrabajadorDAO implements TrabajadorInterface {
     }
 
     @Override
-    public int login(String correo, String contraseña) throws SQLException {
+    public int login(String correo, String contrasenia) throws SQLException {
         sSQL = "SELECT t.TrabajadorID, p.PersonaContraseña " +
                 "from persona p inner join trabajador t on p.PersonaID=t.PersonaID " +
-                "where p.PersonaCorreo like '%" + correo + "%' order by idPersona desc";
+                "where p.PersonaCorreo like '%" + correo + "%' order by PersonaID desc";
 
         Statement st = cn.createStatement();
         ResultSet rs = st.executeQuery(sSQL);
 
         if (rs.next()) {
-            String contraseñaPrueba = rs.getString("PersonaContraseña");
-            if (contraseña.equals(contraseñaPrueba))
+            String contraseniaPrueba = rs.getString("PersonaContraseña");
+            if (contrasenia.equals(contraseniaPrueba))
                 return Integer.parseInt(rs.getString("TrabajadorID"));
         }
         return -1;
@@ -134,10 +137,10 @@ public class TrabajadorDAO implements TrabajadorInterface {
     public boolean insertar(Trabajador dts) throws SQLException {
 
         sSQL = "insert into persona " +
-                "(PersonaDNI,PersonaApellidoP, PersonaApellidoM,PersonaNombre,PersonaEdad,PersonaSexo, PersonaDireccion,PersonaTelefono,PersonaCorreo, PersonaContraseña) " +
-                "values (?,?,?,?,?,?,?,?,?,?)";
+                "(PersonaID, PersonaDNI, PersonaApellidoP, PersonaApellidoM,PersonaNombre,PersonaEdad,PersonaSexo, PersonaDireccion,PersonaTelefono,PersonaCorreo, PersonaContraseña) " +
+                "values (0,?,?,?,?,?,?,?,?,?,?)";
 
-        sSQL2 = "insert into trabajador (PersonaID,TrabajadorEstado) values ((select PersonaID from persona order by idPersona desc limit 1),?,?)";
+        sSQL2 = "insert into trabajador (PersonaID,TrabajadorEstado) values ((select PersonaID from persona order by PersonaID desc limit 1),?)";
 
         PreparedStatement pst = cn.prepareStatement(sSQL);
         PreparedStatement pst2 = cn.prepareStatement(sSQL2);
@@ -153,18 +156,10 @@ public class TrabajadorDAO implements TrabajadorInterface {
         pst.setString(9, dts.getPersonaCorreo());
         pst.setString(10, dts.getPersonaPassword());
 
-        pst2.setInt(1, dts.getTrabajadorID());
+        pst2.setInt(1, dts.getPersonaID());
         pst2.setString(2, dts.getTrabajadorEstado());
 
-        int n = pst.executeUpdate();
-
-        if (n != 0) {
-            int n2 = pst2.executeUpdate();
-
-            if (n2 != 0)
-                return true;
-        }
-        return false;
+        return execStatement(pst, pst2, cn);
     }
     @Override
     public boolean eliminar(Trabajador dts) throws SQLException {
@@ -178,18 +173,7 @@ public class TrabajadorDAO implements TrabajadorInterface {
 
         pst2.setInt(1, dts.getPersonaID());
 
-        int n = pst.executeUpdate();
-
-        if (n != 0) {
-            int n2 = pst2.executeUpdate();
-
-            if (n2 != 0)
-                return true;
-
-
-        }
-
-        return false;
+        return execStatement(pst, pst2, cn);
 
 
     }
@@ -205,7 +189,7 @@ public class TrabajadorDAO implements TrabajadorInterface {
 
         pst2.setInt(1, dts);
 
-        return execStatement(pst, pst2);
+        return execStatement(pst, pst2, cn);
 
 
     }
@@ -237,27 +221,15 @@ public class TrabajadorDAO implements TrabajadorInterface {
         pst.setInt(11, dts.getPersonaID());
 
         pst2.setString(1, dts.getTrabajadorEstado());
+        pst2.setInt(2, dts.getPersonaID());
 
-        return execStatement(pst, pst2);
+        return execStatement(pst, pst2, cn);
 
 
     }
 
-    private boolean execStatement(PreparedStatement pst, PreparedStatement pst2) throws SQLException {
-        int n = pst.executeUpdate();
 
-        if (n != 0) {
-            int n2 = pst2.executeUpdate();
 
-            if (n2 != 0) {
-                cn.close();
-                return true;
-            }
-
-        }
-        cn.close();
-        return false;
-    }
 
 
 }

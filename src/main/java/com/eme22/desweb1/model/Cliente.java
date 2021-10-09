@@ -11,6 +11,10 @@ public class Cliente extends Persona {
         this.clienteReservasActivas = clienteReservasActivas;
     }
 
+    public Cliente() {
+
+    }
+
     public int getClienteCodigo() {
         return clienteCodigo;
     }
